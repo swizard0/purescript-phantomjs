@@ -9,6 +9,7 @@ import Test.Phantomjs
 import Test.Phantomjs.System
 import Test.Phantomjs.Object
 import Test.Phantomjs.Webpage
+import Test.Phantomjs.Filesystem
 
 
 main :: forall e. Eff ( phantomjs :: PHANTOMJS
@@ -17,4 +18,6 @@ main = do
   args <- args
   print args
   page <- create
+  content <- read "README.md"
+  log content
   exit 0
