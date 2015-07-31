@@ -10,6 +10,7 @@ import Test.Phantomjs.System
 import Test.Phantomjs.Object
 import Test.Phantomjs.Webpage
 import Test.Phantomjs.Filesystem
+import Test.Phantomjs.ChildProcess
 
 
 main :: forall e. Eff ( phantomjs :: PHANTOMJS
@@ -20,4 +21,5 @@ main = do
   page <- create
   content <- read "README.md"
   log content
+  child <- spawn "ls" ["-la", "/"]
   exit 0
