@@ -20,7 +20,7 @@ capture page = do
   exit 0
 ```
 In fact, once everything is installed, you can run this very example with:
-```
+``` shell
 pulp build -I test -m YCombinatorExample -t hn.js && phantomjs hn.js
 ```
 
@@ -33,20 +33,16 @@ See the [test directory](/test/) for more examples.
 
 ## Installation
 
-```
+``` shell
 npm install -g purescript
-```
-```
 npm install -g pulp
-```
-```
 brew install phantomjs
 ```
 (Or the equivalent on your machine.)
 
 Make a new directory and initialize a new project:
 
-```
+``` shell
 mkdir my-purescript-phantomjs-test
 cd my-purescript-phantomjs-test
 pulp init
@@ -54,7 +50,7 @@ pulp init
 
 Now install the library:
 
-```
+``` shell
 pulp dep i purescript-phantomjs
 ```
 
@@ -64,12 +60,12 @@ This library provides PureScript bindings to the Phantomjs API. You can use it t
 
 For example, to compile a script that takes a screenshot of the Yahoo homepage, run the following command in this project's root directory:
 
-```
+``` shell
 pulp build --include test --main Test.Main --to phantom-script.js
 ```
 
 and then execute it with:
-```
+``` shell
 phantomjs phantom-script.js http://yahoo.com
 ```
 
