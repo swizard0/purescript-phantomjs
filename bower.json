@@ -2,7 +2,7 @@
   "name": "purescript-phantomjs",
   "version": "0.1.0",
   "authors": [
-    "Andrew Mohrland <cxfreeio@gmail.com"
+    "Andrew Mohrland <cxfreeio@gmail.com>"
   ],
   "license": "MIT",
   "moduleType": [
