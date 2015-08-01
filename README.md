@@ -71,12 +71,12 @@ This library provides PureScript bindings to the Phantomjs API. You can use it t
 For example, to compile a script that takes a screenshot of the Yahoo homepage, run the following command in this project's root directory:
 
 ```
-pulp build -O -t phantom-script.js
+pulp build --include test --main Test.Main --to phantom-script.js
 ```
 
-You can then executed it with:
+and then executed it with:
 ```
-phantomjs phantom-script.js
+phantomjs phantom-script.js http://yahoo.com
 ```
 
 # API Docs
