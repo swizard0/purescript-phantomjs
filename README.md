@@ -26,7 +26,7 @@ pulp build -I test -m YCombinatorExample -t hn.js && phantomjs hn.js
 
 Not bad!
 
-See the [examples directory](/examples/) for more examples.
+See the [test directory](/test/) for more examples.
 
 
 # Getting Started
