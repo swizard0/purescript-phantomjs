@@ -4,6 +4,7 @@
   "authors": [
     "Andrew Mohrland <cxfreeio@gmail.com"
   ],
+  "license": "MIT",
   "moduleType": [
     "node"
   ],
