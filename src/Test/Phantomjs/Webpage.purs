@@ -1,6 +1,8 @@
 module Test.Phantomjs.Webpage (
-  Page()
+  BrowserProc()
+, Page()
 , create
+, evaluate0
 , open
 , openWithTimeout
 , render
@@ -17,11 +19,23 @@ import Control.Monad.Aff.Par
 import Control.Monad.Error.Class
 import Test.Phantomjs
 
+foreign import data BrowserProc :: * -> *
+
 foreign import data Page :: *
 
 foreign import create
   :: forall e. Eff (phantomjs :: PHANTOMJS | e) Page
 
+
+-- | Run a NON-closure procedure in the browser
+-- | environment. `evaluateN` takes N arguments. Arguments must be
+-- | JSON-serializable.
+-- |
+foreign import evaluate0
+  :: forall e a.
+     Page
+  -> BrowserProc a
+  -> Eff (phantomjs :: PHANTOMJS | e) a
 
 
 open :: forall e. Page -> String -> Aff (phantomjs :: PHANTOMJS | e) Unit
@@ -42,6 +56,11 @@ openWithTimeout page url timeout =
   where
     timeoutError timeout = error $ "Timed out after " ++ show timeout ++ " seconds"
 
+foreign import render
+  :: forall e.
+     Page
+  -> File
+  -> Eff (phantomjs :: PHANTOMJS | e) Unit
 
 
 foreign import _open
@@ -50,11 +69,4 @@ foreign import _open
   -> Eff (phantomjs :: PHANTOMJS | e) Unit
   -> Page
   -> String
-  -> Eff (phantomjs :: PHANTOMJS | e) Unit
-
-
-foreign import render
-  :: forall e.
-     Page
-  -> File
   -> Eff (phantomjs :: PHANTOMJS | e) Unit

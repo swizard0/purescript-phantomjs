@@ -6,6 +6,14 @@ exports.create = function () {
   return require('webpage').create()
 }
 
+exports.evaluate0 = function (page) {
+  return function (proc) {
+    return function () {
+      return page.evaluate(eval(proc))
+    }
+  }
+}
+
 exports._open = function (onError) {
   return function (onSuccess) {
     return function (page) {

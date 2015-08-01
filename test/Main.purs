@@ -20,6 +20,8 @@ import Test.Phantomjs.Webpage
 import Test.Phantomjs.Filesystem
 import Test.Phantomjs.ChildProcess
 
+import Test.BrowserProcs
+
 
 main :: forall e. Eff ( phantomjs :: PHANTOMJS
                       , console :: CONSOLE | e) Unit
@@ -37,11 +39,14 @@ main = do
     (\url -> (runAff
               (print >=> const (exit 1))
               ((const (log $ "Screenshot of " ++
-                      url ++
-                      " saved to " ++
-                      outfile ++
-                      ".")) >=> const (exit 0))
-              (open page url *> (liftEff $ screenshot page outfile))))
+                       url ++
+                       " saved to " ++
+                       outfile ++
+                       ".")) >=> const (exit 0))
+              (open page url *>
+               (liftEff $ screenshot page outfile) *>
+               (liftEff $ logDocumentTitle page)
+              )))
     (index args 1)
 
 screenshot ::
@@ -49,3 +54,9 @@ screenshot ::
 screenshot page outfile = do
   log "Successfully connected."
   render page outfile
+
+logDocumentTitle ::
+  forall e. Page -> Eff (phantomjs :: PHANTOMJS, console :: CONSOLE | e) Unit
+logDocumentTitle page = do
+  browser_docTitle <- evaluate0 page docTitle
+  log $ "Browser document title: " ++ browser_docTitle
