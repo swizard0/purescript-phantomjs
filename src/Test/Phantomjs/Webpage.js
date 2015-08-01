@@ -20,3 +20,11 @@ exports._open = function (onError) {
     }
   }
 }
+
+exports.render = function (page) {
+  return function (file) {
+    return function () {
+      page.render(file)
+    }
+  }
+}

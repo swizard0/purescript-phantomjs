@@ -58,3 +58,4 @@ screenshot :: forall e. Page -> Url -> File -> Timeout -> Aff ( phantomjs :: PHA
 screenshot page url outfile timeout = do
   open page url
   liftEff $ log "Successfully connected."
+  liftEff $ render page outfile

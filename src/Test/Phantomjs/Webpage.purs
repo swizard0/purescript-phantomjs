@@ -2,6 +2,7 @@ module Test.Phantomjs.Webpage (
   Page()
 , create
 , open
+, render
 ) where
 
 import Prelude
@@ -34,4 +35,11 @@ foreign import _open
   -> Eff (phantomjs :: PHANTOMJS | e) Unit
   -> Page
   -> String
+  -> Eff (phantomjs :: PHANTOMJS | e) Unit
+
+
+foreign import render
+  :: forall e.
+     Page
+  -> File
   -> Eff (phantomjs :: PHANTOMJS | e) Unit
