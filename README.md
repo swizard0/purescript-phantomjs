@@ -1,6 +1,6 @@
 # purescript-phantomjs
 
-Write your [Phantomjs](http://phantomjs.org/) scripts with PureScript!
+Write your [Phantomjs](http://phantomjs.org/) scripts with [PureScript](http://www.purescript.org/)!
 
 # Example
 
