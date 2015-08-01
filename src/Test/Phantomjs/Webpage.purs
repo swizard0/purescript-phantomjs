@@ -44,9 +44,6 @@ openWithTimeout page url timeout =
 
 
 
-foreign import undefined :: forall a. a
--- _open = undefined
-
 foreign import _open
   :: forall e.
      (Error -> Eff (phantomjs :: PHANTOMJS | e) Unit)
