@@ -72,3 +72,14 @@ exports.render = function (page) {
     }
   }
 }
+
+exports._setClipRect = function (page,top,left,width,height) {
+  return function () {
+    page.clipRect = {
+      top: top,
+      left: left,
+      width: width,
+      height: height
+    }
+  }
+}

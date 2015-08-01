@@ -1,14 +1,18 @@
 module Test.Phantomjs.Webpage (
   BrowserProc()
 , Page()
+, Rect(..)
 , create
 , evaluate0
 , open
 , openWithTimeout
 , render
+, setClipRect
 ) where
 
 import Prelude
+
+import Data.Function
 
 import Control.Alt
 import Control.Monad.Eff.Exception
@@ -27,6 +31,10 @@ foreign import data BrowserProc :: * -> *
 -- | An instance of Phantom's `webpage`.
 -- |
 foreign import data Page :: *
+
+-- | Rectangular area of the web page to be rasterized when rendered.
+-- |
+newtype Rect = Rect { top :: Int, left :: Int, width :: Int, height :: Int }
 
 -- | Creates an instance of Phantom's `webpage`.
 -- |
@@ -110,6 +118,15 @@ foreign import render
   -> File
   -> Eff (phantomjs :: PHANTOMJS | e) Unit
 
+-- | Sets the rectangular area of the web page to be rasterized when rendered.
+-- |
+setClipRect
+  :: forall e.
+     Page
+  -> Rect
+  -> Eff (phantomjs :: PHANTOMJS | e) Unit
+setClipRect page (Rect rect) = runFn5 _setClipRect page rect.top rect.left rect.width rect.height
+
 foreign import _open
   :: forall e.
      (Error -> Eff (phantomjs :: PHANTOMJS | e) Unit)
@@ -117,3 +134,13 @@ foreign import _open
   -> Page
   -> String
   -> Eff (phantomjs :: PHANTOMJS | e) Unit
+
+foreign import _setClipRect
+  :: forall e.
+     Fn5
+     Page
+     Int
+     Int
+     Int
+     Int
+     (Eff (phantomjs :: PHANTOMJS | e) Unit)
