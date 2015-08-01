@@ -36,11 +36,11 @@ main = do
     ((print $ error "No url given") *> exit 0)
     (\url -> (runAff
               (print >=> const (exit 1))
-              (const (log $ "Screenshot of " ++
+              ((const (log $ "Screenshot of " ++
                       url ++
                       " saved to " ++
                       outfile ++
-                      "."))
+                      ".")) >=> const (exit 0))
               (screenshot page url outfile timeout)))
     (index args 1)
 
