@@ -41,7 +41,7 @@ main = do
                       " saved to " ++
                       outfile ++
                       ".")) >=> const (exit 0))
-              (screenshot page url outfile timeout)))
+              (open page url *> (liftEff $ screenshot page outfile))))
     (index args 1)
 
 
@@ -52,10 +52,8 @@ timeoutError ms = error $ "Timed out after " ++ show ms ++ " seconds"
 type Url = String
 type Timeout = Int
 
-screenshot :: forall e. Page -> Url -> File -> Timeout -> Aff ( phantomjs :: PHANTOMJS
-                                                              , console :: CONSOLE
-                                                              | e) Unit
-screenshot page url outfile timeout = do
-  open page url
-  liftEff $ log "Successfully connected."
-  liftEff $ render page outfile
+screenshot ::
+  forall e. Page -> File -> Eff ( phantomjs :: PHANTOMJS, console :: CONSOLE | e) Unit
+screenshot page outfile = do
+  log "Successfully connected."
+  render page outfile
