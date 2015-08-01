@@ -7,6 +7,8 @@ module Test.Phantomjs (
 
 import Control.Monad.Eff
 
+-- | A computation that executes Phantom.js commands.
+-- |
 foreign import data PHANTOMJS :: !
 
 type File = String
