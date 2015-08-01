@@ -37,6 +37,41 @@ foreign import evaluate0
   -> BrowserProc a
   -> Eff (phantomjs :: PHANTOMJS | e) a
 
+-- | Run a NON-closure procedure in the browser
+-- | environment. `evaluateN` takes N arguments. Arguments must be
+-- | JSON-serializable.
+-- |
+foreign import evaluate1
+  :: forall e a b.
+     Page
+  -> (a -> BrowserProc b)
+  -> a
+  -> Eff (phantomjs :: PHANTOMJS | e) b
+
+-- | Run a NON-closure procedure in the browser
+-- | environment. `evaluateN` takes N arguments. Arguments must be
+-- | JSON-serializable.
+-- |
+foreign import evaluate2
+  :: forall e a b c.
+     Page
+  -> (a -> b -> BrowserProc c)
+  -> a
+  -> b
+  -> Eff (phantomjs :: PHANTOMJS | e) c
+
+-- | Run a NON-closure procedure in the browser
+-- | environment. `evaluateN` takes N arguments. Arguments must be
+-- | JSON-serializable.
+-- |
+foreign import evaluate3
+  :: forall e a b c d.
+     Page
+  -> (a -> b -> c -> BrowserProc d)
+  -> a
+  -> b
+  -> c
+  -> Eff (phantomjs :: PHANTOMJS | e) d
 
 open :: forall e. Page -> String -> Aff (phantomjs :: PHANTOMJS | e) Unit
 open page url = makeAff (\onError onSuccess -> _open

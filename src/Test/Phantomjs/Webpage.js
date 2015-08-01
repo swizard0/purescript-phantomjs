@@ -14,6 +14,42 @@ exports.evaluate0 = function (page) {
   }
 }
 
+exports.evaluate1 = function (page) {
+  return function (proc) {
+    return function (_1) {
+      return function () {
+        return page.evaluate(eval(proc),_1)
+      }
+    }
+  }
+}
+
+exports.evaluate2 = function (page) {
+  return function (proc) {
+    return function (_1) {
+      return function (_2) {
+        return function () {
+          return page.evaluate(eval(proc),_1,_2)
+        }
+      }
+    }
+  }
+}
+
+exports.evaluate3 = function (page) {
+  return function (proc) {
+    return function (_1) {
+      return function (_2) {
+        return function (_3) {
+          return function () {
+            return page.evaluate(eval(proc),_1,_2,_3)
+          }
+        }
+      }
+    }
+  }
+}
+
 exports._open = function (onError) {
   return function (onSuccess) {
     return function (page) {
