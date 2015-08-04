@@ -1,8 +1,8 @@
 # purescript-phantomjs
 
-[![Build Status](https://travis-ci.org/cxfreeio/purescript-phantomjs.svg?branch=master)](https://travis-ci.org/cxfreeio/purescript-phantomjs)
-
 Write your [Phantomjs](http://phantomjs.org/) scripts with [PureScript](http://www.purescript.org/)!
+
+[![Build Status](https://travis-ci.org/cxfreeio/purescript-phantomjs.svg?branch=master)](https://travis-ci.org/cxfreeio/purescript-phantomjs)
 
 # Example
 
