@@ -37,19 +37,19 @@ main = do
                        outfile ++
                        ".")) >=> const (exit 0))
               (open page url *>
-               (liftEff $ screenshot page outfile) *>
-               (liftEff $ logDocumentTitle page)
+               (liftEff $ log "Successfully connected.") *>
+               (liftEff $ logDocumentTitle page) *>
+               (liftEff $ screenshot page outfile)
               )))
     (index args 1)
 
 screenshot ::
   forall e. Page -> File -> Eff (phantomjs :: PHANTOMJS, console :: CONSOLE | e) Unit
 screenshot page outfile = do
-  log "Successfully connected."
   render page outfile
 
 logDocumentTitle ::
   forall e. Page -> Eff (phantomjs :: PHANTOMJS, console :: CONSOLE | e) Unit
 logDocumentTitle page = do
   browser_docTitle <- evaluate0 page docTitle
-  log $ "Browser document title: " ++ browser_docTitle
+  log $ "Taking screenshot of " ++ browser_docTitle ++ "..."
