@@ -26,7 +26,6 @@
     "url": "git://github.com/cxfreeio/purescript-phantomjs.git"
   },
   "devDependencies": {
-    "purescript-spec": "~0.7.1",
-    "purescript-foreign": "~0.6.0"
+    "purescript-spec": "~0.7.1"
   }
 }
