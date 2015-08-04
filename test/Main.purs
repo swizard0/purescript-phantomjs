@@ -1,4 +1,4 @@
-module Test.Main where
+module Main where
 
 import Prelude
 
@@ -19,13 +19,19 @@ import Test.Phantomjs.Object
 import Test.Phantomjs.Webpage
 import Test.Phantomjs.Filesystem
 import Test.Phantomjs.ChildProcess
-
 import Test.BrowserProcs
 
+import TestHelpers
+import SystemTest
+import ObjectTest
 
-main :: forall e. Eff ( phantomjs :: PHANTOMJS
+main = phantomSpec do
+  objectTest
+  systemTest
+
+main2 :: forall e. Eff ( phantomjs :: PHANTOMJS
                       , console :: CONSOLE | e) Unit
-main = do
+main2 = do
   args <- args
   content <- read "README.md"
   log content
