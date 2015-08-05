@@ -2,6 +2,7 @@ module TestHelpers (
   (#>)
 , (#>:)
 , phantomSpec
+, pendingWith
 , test
 , typeTest
 , module Control.Monad.Eff.Class
@@ -18,6 +19,7 @@ import qualified Test.Phantomjs.Object as Phantom
 
 (#>)  = describe
 (#>:) = it
+pendingWith = pending
 
 phantomSpec tests = run [consoleReporter] do
   tests

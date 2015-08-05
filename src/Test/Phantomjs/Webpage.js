@@ -6,6 +6,24 @@ exports.create = function () {
   return require('webpage').create()
 }
 
+exports._getClipRect = function (page) {
+  return function () {
+    page.clipRect
+    return {}
+  }
+}
+
+exports._setClipRect = function (page,top,left,width,height) {
+  return function () {
+    page.clipRect = {
+      top: top,
+      left: left,
+      width: width,
+      height: height
+    }
+  }
+}
+
 exports.evaluate0 = function (page) {
   return function (proc) {
     return function () {
@@ -69,17 +87,6 @@ exports.render = function (page) {
   return function (file) {
     return function () {
       page.render(file)
-    }
-  }
-}
-
-exports._setClipRect = function (page,top,left,width,height) {
-  return function () {
-    page.clipRect = {
-      top: top,
-      left: left,
-      width: width,
-      height: height
     }
   }
 }

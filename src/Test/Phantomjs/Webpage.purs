@@ -2,12 +2,14 @@ module Test.Phantomjs.Webpage (
   BrowserProc()
 , Page()
 , Rect(..)
+, RectObj()
 , create
 , evaluate0
 , open
 , openWithTimeout
 , render
 , setClipRect
+, getClipRect
 ) where
 
 import Prelude
@@ -34,7 +36,8 @@ foreign import data Page :: *
 
 -- | Rectangular area of the web page to be rasterized when rendered.
 -- |
-newtype Rect = Rect { top :: Int, left :: Int, width :: Int, height :: Int }
+type RectObj = { top :: Int, left :: Int, width :: Int, height :: Int }
+newtype Rect = Rect RectObj
 
 -- | Creates an instance of Phantom's `webpage`.
 -- |
@@ -96,6 +99,13 @@ open page url = makeAff (\onError onSuccess -> _open
                                                page
                                                url)
 
+foreign import _open
+  :: forall e.
+     (Error -> Eff (phantomjs :: PHANTOMJS | e) Unit)
+  -> Eff (phantomjs :: PHANTOMJS | e) Unit
+  -> Page
+  -> String
+  -> Eff (phantomjs :: PHANTOMJS | e) Unit
 
 -- | Opens a connection to the given URL, but may fail with a timeout.
 -- |
@@ -118,6 +128,19 @@ foreign import render
   -> File
   -> Eff (phantomjs :: PHANTOMJS | e) Unit
 
+-- | Gets the rectangular area of the web page to be rasterized when rendered.
+-- |
+getClipRect
+  :: forall e.
+     Page
+  -> Eff (phantomjs :: PHANTOMJS | e) Rect
+getClipRect page = _getClipRect page <#> Rect
+
+foreign import _getClipRect
+  :: forall e.
+     Page
+     -> (Eff (phantomjs :: PHANTOMJS | e) RectObj)
+
 -- | Sets the rectangular area of the web page to be rasterized when rendered.
 -- |
 setClipRect
@@ -126,14 +149,6 @@ setClipRect
   -> Rect
   -> Eff (phantomjs :: PHANTOMJS | e) Unit
 setClipRect page (Rect rect) = runFn5 _setClipRect page rect.top rect.left rect.width rect.height
-
-foreign import _open
-  :: forall e.
-     (Error -> Eff (phantomjs :: PHANTOMJS | e) Unit)
-  -> Eff (phantomjs :: PHANTOMJS | e) Unit
-  -> Page
-  -> String
-  -> Eff (phantomjs :: PHANTOMJS | e) Unit
 
 foreign import _setClipRect
   :: forall e.
