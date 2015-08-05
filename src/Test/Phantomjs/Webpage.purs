@@ -3,13 +3,14 @@ module Test.Phantomjs.Webpage (
 , Page()
 , Rect(..)
 , RectObj()
+, setClipRect
+, getClipRect
 , create
 , evaluate0
 , open
 , openWithTimeout
 , render
-, setClipRect
-, getClipRect
+, url
 ) where
 
 import Prelude
@@ -139,7 +140,7 @@ getClipRect page = _getClipRect page <#> Rect
 foreign import _getClipRect
   :: forall e.
      Page
-     -> (Eff (phantomjs :: PHANTOMJS | e) RectObj)
+  -> Eff (phantomjs :: PHANTOMJS | e) RectObj
 
 -- | Sets the rectangular area of the web page to be rasterized when rendered.
 -- |
@@ -159,3 +160,8 @@ foreign import _setClipRect
      Int
      Int
      (Eff (phantomjs :: PHANTOMJS | e) Unit)
+
+foreign import url
+  :: forall e.
+     Page
+  -> Eff (phantomjs :: PHANTOMJS | e) String

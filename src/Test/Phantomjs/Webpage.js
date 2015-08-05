@@ -90,3 +90,9 @@ exports.render = function (page) {
     }
   }
 }
+
+exports.url = function (page) {
+  return function () {
+    return page.url
+  }
+}
