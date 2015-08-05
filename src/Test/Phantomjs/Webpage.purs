@@ -3,13 +3,19 @@ module Test.Phantomjs.Webpage (
 , Page()
 , Rect(..)
 , RectObj()
+, ScrollPosition(..)
+, ScrollPositionObj()
+, content
 , setClipRect
 , getClipRect
 , create
 , evaluate0
 , open
 , openWithTimeout
+, plainText
 , render
+, getScrollPosition
+, setScrollPosition
 , url
 ) where
 
@@ -39,6 +45,46 @@ foreign import data Page :: *
 -- |
 type RectObj = { top :: Int, left :: Int, width :: Int, height :: Int }
 newtype Rect = Rect RectObj
+
+type ScrollPositionObj = { top :: Int, left :: Int }
+newtype ScrollPosition = ScrollPosition ScrollPositionObj
+
+-- | Gets the rectangular area of the web page to be rasterized when rendered.
+-- |
+getClipRect
+  :: forall e.
+     Page
+  -> Eff (phantomjs :: PHANTOMJS | e) Rect
+getClipRect page = _getClipRect page <#> Rect
+
+foreign import _getClipRect
+  :: forall e.
+     Page
+  -> Eff (phantomjs :: PHANTOMJS | e) RectObj
+
+-- | Sets the rectangular area of the web page to be rasterized when rendered.
+-- |
+setClipRect
+  :: forall e.
+     Page
+  -> Rect
+  -> Eff (phantomjs :: PHANTOMJS | e) Unit
+setClipRect page (Rect rect) = runFn5 _setClipRect page rect.top rect.left rect.width rect.height
+
+foreign import _setClipRect
+  :: forall e.
+     Fn5
+     Page
+     Int
+     Int
+     Int
+     Int
+     (Eff (phantomjs :: PHANTOMJS | e) Unit)
+
+foreign import content
+  :: forall e.
+     Page
+  -> Eff (phantomjs :: PHANTOMJS | e) String
 
 -- | Creates an instance of Phantom's `webpage`.
 -- |
@@ -120,6 +166,11 @@ openWithTimeout page url timeout =
   where
     timeoutError timeout = error $ "Timed out after " ++ show timeout ++ " seconds"
 
+foreign import plainText
+  :: forall e.
+     Page
+  -> Eff (phantomjs :: PHANTOMJS | e) String
+
 -- | Renders the page image to a file. File extension determines
 -- | format. Accepts: PNG, GIF, JPEG, PDF.
 -- |
@@ -129,37 +180,29 @@ foreign import render
   -> File
   -> Eff (phantomjs :: PHANTOMJS | e) Unit
 
--- | Gets the rectangular area of the web page to be rasterized when rendered.
--- |
-getClipRect
+getScrollPosition
   :: forall e.
      Page
-  -> Eff (phantomjs :: PHANTOMJS | e) Rect
-getClipRect page = _getClipRect page <#> Rect
+  -> Eff (phantomjs :: PHANTOMJS | e) ScrollPosition
+getScrollPosition page = _getScrollPosition page <#> ScrollPosition
 
-foreign import _getClipRect
+foreign import _getScrollPosition
   :: forall e.
      Page
-  -> Eff (phantomjs :: PHANTOMJS | e) RectObj
+  -> Eff (phantomjs :: PHANTOMJS | e) ScrollPositionObj
 
--- | Sets the rectangular area of the web page to be rasterized when rendered.
--- |
-setClipRect
+setScrollPosition
   :: forall e.
      Page
-  -> Rect
+  -> ScrollPosition
   -> Eff (phantomjs :: PHANTOMJS | e) Unit
-setClipRect page (Rect rect) = runFn5 _setClipRect page rect.top rect.left rect.width rect.height
+setScrollPosition page (ScrollPosition scrollPos) = _setScrollPosition page scrollPos
 
-foreign import _setClipRect
+foreign import _setScrollPosition
   :: forall e.
-     Fn5
      Page
-     Int
-     Int
-     Int
-     Int
-     (Eff (phantomjs :: PHANTOMJS | e) Unit)
+  -> ScrollPositionObj
+  -> Eff (phantomjs :: PHANTOMJS | e) Unit
 
 foreign import url
   :: forall e.

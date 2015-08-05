@@ -2,26 +2,31 @@
 
 // module Test.Phantomjs.Webpage
 
-exports.create = function () {
-  return require('webpage').create()
+exports.content = function (page) {
+  return function () {
+    return page.content
+  }
 }
 
 exports._getClipRect = function (page) {
   return function () {
-    page.clipRect
-    return {}
+    return page.clipRect
   }
 }
 
 exports._setClipRect = function (page,top,left,width,height) {
   return function () {
-    page.clipRect = {
+    return page.clipRect = {
       top: top,
       left: left,
       width: width,
       height: height
     }
   }
+}
+
+exports.create = function () {
+  return require('webpage').create()
 }
 
 exports.evaluate0 = function (page) {
@@ -73,7 +78,7 @@ exports._open = function (onError) {
     return function (page) {
       return function (url) {
         return function () {
-          page.open(url, function (status) {
+          return page.open(url, function (status) {
             if (status === 'success') onSuccess()
             else onError(new Error("Connection failure"))()
           })
@@ -83,10 +88,30 @@ exports._open = function (onError) {
   }
 }
 
+exports.plainText = function (page) {
+  return function () {
+    return page.plainText
+  }
+}
+
 exports.render = function (page) {
   return function (file) {
     return function () {
-      page.render(file)
+      return page.render(file)
+    }
+  }
+}
+
+exports._getScrollPosition = function (page) {
+  return function () {
+    return page.scrollPosition
+  }
+}
+
+exports._setScrollPosition = function (page) {
+  return function (obj) {
+    return function () {
+      return page.scrollPosition = obj
     }
   }
 }
