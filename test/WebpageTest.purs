@@ -35,6 +35,10 @@ webpageTest = do
     W.ScrollPosition scrollPos <- liftEff $ W.getScrollPosition page
     test "setScrollPosition" $ scrollPos.top == 10 && scrollPos.left == 10
 
+    liftEff $ W.setViewportSize page (W.ViewportSize {width: 10, height: 10})
+    W.ViewportSize size <- liftEff $ W.getViewportSize page
+    test "get and set viewportSize" $ size.width == 10 && size.height == 10
+
 
 exampleText = """Example Domain
 

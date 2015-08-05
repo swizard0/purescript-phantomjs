@@ -121,3 +121,17 @@ exports.url = function (page) {
     return page.url
   }
 }
+
+exports._getViewportSize = function (page) {
+  return function () {
+    return page.viewportSize
+  }
+}
+
+exports._setViewportSize = function (page) {
+  return function (obj) {
+    return function () {
+      return page.viewportSize = obj
+    }
+  }
+}

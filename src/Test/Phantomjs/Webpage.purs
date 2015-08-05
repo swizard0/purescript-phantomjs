@@ -5,6 +5,8 @@ module Test.Phantomjs.Webpage (
 , RectObj()
 , ScrollPosition(..)
 , ScrollPositionObj()
+, ViewportSize(..)
+, ViewportSizeObj()
 , content
 , setClipRect
 , getClipRect
@@ -17,6 +19,8 @@ module Test.Phantomjs.Webpage (
 , getScrollPosition
 , setScrollPosition
 , url
+, getViewportSize
+, setViewportSize
 ) where
 
 import Prelude
@@ -48,6 +52,9 @@ newtype Rect = Rect RectObj
 
 type ScrollPositionObj = { top :: Int, left :: Int }
 newtype ScrollPosition = ScrollPosition ScrollPositionObj
+
+type ViewportSizeObj = { width :: Int, height :: Int }
+newtype ViewportSize = ViewportSize ViewportSizeObj
 
 -- | Gets the rectangular area of the web page to be rasterized when rendered.
 -- |
@@ -208,3 +215,27 @@ foreign import url
   :: forall e.
      Page
   -> Eff (phantomjs :: PHANTOMJS | e) String
+
+getViewportSize
+  :: forall e.
+     Page
+  -> Eff (phantomjs :: PHANTOMJS | e) ViewportSize
+getViewportSize page = _getViewportSize page <#> ViewportSize
+
+foreign import _getViewportSize
+  :: forall e.
+     Page
+  -> Eff (phantomjs :: PHANTOMJS | e) ViewportSizeObj
+
+setViewportSize
+  :: forall e.
+     Page
+  -> ViewportSize
+  -> Eff (phantomjs :: PHANTOMJS | e) Unit
+setViewportSize page (ViewportSize size) = _setViewportSize page size
+
+foreign import _setViewportSize
+  :: forall e.
+     Page
+  -> ViewportSizeObj
+  -> Eff (phantomjs :: PHANTOMJS | e) Unit
