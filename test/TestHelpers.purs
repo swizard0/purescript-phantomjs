@@ -3,6 +3,7 @@ module TestHelpers (
 , (#>:)
 , phantomSpec
 , test
+, typeTest
 , module Control.Monad.Eff.Class
 ) where
 
@@ -27,4 +28,9 @@ phantomSpec tests = run [consoleReporter] do
 -- compiled. Because of this, we need to print our own output.
 test desc cond = do
   log $ (if cond then "Success" else "Failure") ++ ": " ++ desc
+  unit `shouldEqual` unit
+
+typeTest desc value matchType = do
+  pure $ value `asTypeOf` matchType
+  log $ "Successfully typed: " ++ desc
   unit `shouldEqual` unit
