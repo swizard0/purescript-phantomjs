@@ -65,5 +65,6 @@ foreign import exit
 --      String
 --   -> Eff (phantomjs :: PHANTOMJS | e) Unit
 
+-- Get Phantomjs version.
 foreign import version
   :: forall e. Eff (phantomjs :: PHANTOMJS | e) Version
