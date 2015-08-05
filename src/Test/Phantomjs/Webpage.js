@@ -135,3 +135,15 @@ exports._setViewportSize = function (page) {
     }
   }
 }
+
+exports.getZoomFactor = function (page) {
+  return function () {
+    return page.zoomFactor
+  }
+}
+
+exports._setZoomFactor = function (page, factor) {
+  return function () {
+    page.zoomFactor = factor
+  }
+}

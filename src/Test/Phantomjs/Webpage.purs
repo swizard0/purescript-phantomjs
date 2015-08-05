@@ -21,6 +21,8 @@ module Test.Phantomjs.Webpage (
 , url
 , getViewportSize
 , setViewportSize
+, getZoomFactor
+, setZoomFactor
 ) where
 
 import Prelude
@@ -239,3 +241,19 @@ foreign import _setViewportSize
      Page
   -> ViewportSizeObj
   -> Eff (phantomjs :: PHANTOMJS | e) Unit
+
+-- | Gets the zoom factor for the page.
+-- |
+foreign import getZoomFactor :: forall e. Page -> Eff (phantomjs :: PHANTOMJS | e) Number
+
+-- | Sets the zoom factor for the page.
+-- |
+setZoomFactor :: forall e. Page -> Number -> Eff (phantomjs :: PHANTOMJS | e) Unit
+setZoomFactor page factor = runFn2 _setZoomFactor page factor
+
+foreign import _setZoomFactor
+  :: forall e.
+     Fn2
+     Page
+     Number
+     (Eff (phantomjs :: PHANTOMJS | e) Unit)

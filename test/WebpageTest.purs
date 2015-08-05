@@ -8,6 +8,7 @@ import Test.Phantomjs
 import qualified Test.Phantomjs.Webpage as W
 import Control.Monad.Aff.Console
 import Control.Monad.Eff.Class
+import Math (abs)
 
 main = phantomSpec do
   webpageTest
@@ -39,6 +40,9 @@ webpageTest = do
     W.ViewportSize size <- liftEff $ W.getViewportSize page
     test "get and set viewportSize" $ size.width == 10 && size.height == 10
 
+    liftEff $ W.setZoomFactor page 0.10
+    size <- liftEff $ W.getZoomFactor page
+    test "get and set zoomFactor" $ abs (size - 0.10) < 0.000001
 
 exampleText = """Example Domain
 
