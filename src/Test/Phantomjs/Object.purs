@@ -9,7 +9,8 @@ module Test.Phantomjs.Object (
 , setCookiesEnabled
 , deleteCookie
 , exit
-, libraryPath
+-- , getLibraryPath
+-- , setLibraryPath
 , version
 ) where
 
@@ -56,8 +57,13 @@ foreign import deleteCookie
 foreign import exit
   :: forall e. Int -> Eff (phantomjs :: PHANTOMJS | e) Unit
 
-foreign import libraryPath
-  :: forall e. Eff (phantomjs :: PHANTOMJS | e) String
+-- foreign import getLibraryPath
+--   :: forall e. Eff (phantomjs :: PHANTOMJS | e) String
+
+-- foreign import setLibraryPath
+--   :: forall e.
+--      String
+--   -> Eff (phantomjs :: PHANTOMJS | e) Unit
 
 foreign import version
   :: forall e. Eff (phantomjs :: PHANTOMJS | e) Version

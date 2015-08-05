@@ -19,31 +19,42 @@ objectTest = do
       test "version" $ version.major == 2
     "cookies" #>: do
       cookies <- liftEff $ Phantom.getCookies
-      -- test "cookies" $ cookies == []
-      pure unit
+      typeTest "cookies" cookies ([Phantom.Cookie { name: "mycookie"
+                                                  , value: "mycookievalue"
+                                                  , domain: "mydomain.com"
+                                                  }])
     "addCookie" #>: do
       worked <- liftEff $ Phantom.addCookie $ Phantom.Cookie { name: "mycookie"
-                                                     , value: "mycookievalue"
-                                                     , domain: "mydomain.com"
-                                                     }
-      cookies <- liftEff $ Phantom.getCookies
+                                                             , value: "mycookievalue"
+                                                             , domain: "mydomain.com"
+                                                             }
       test "addCookie" $ worked == true
-        -- &&
-        -- (cookies !! 0 <#> Phantom.Cookie) == (Just $ Phantom.Cookie { name: "mycookie"
-        --                                                             , value: "mycookievalue"
-        --                                                             , domain: "mydomain.com"
-        --                                                             })
 
     "deleteCookie" #>: do
       worked <- liftEff $ Phantom.deleteCookie "mycookie"
       test "deleteCookie" $ worked == true
-      cookies <- liftEff $ Phantom.getCookies
-      -- test "cookies" $ cookies == []
-      pure unit
 
     "clearCookies" #>: do
       liftEff $ Phantom.clearCookies
+      cookies <- liftEff $ Phantom.getCookies
+      test "clearCookies" $ null cookies
 
-    "cookiesEnabled" #>: do
+    "getCookiesEnabled" #>: do
       enabled <- liftEff $ Phantom.getCookiesEnabled
-      test "enabled" $ enabled == true
+      test "getCookiesEnabled" $ enabled == true
+
+    "setCookiesEnabled" #>: do
+      liftEff $ Phantom.setCookiesEnabled false
+      enabled <- liftEff $ Phantom.getCookiesEnabled
+      test "setCookiesEnabled" $ enabled == false
+
+    -- "getLibraryPath" #>: do
+    --   libPath <- liftEff $ Phantom.getLibraryPath
+    --   pure unit
+      -- typeTest "getLibraryPath" libPath ""
+
+    -- "setLibraryPath" #>: do
+    --   let path = "/foo/bar/baz"
+    --   libPath <- liftEff $ Phantom.setLibraryPath path
+    --   libPath <- liftEff $ Phantom.getLibraryPath
+    --   test "libraryPath" $ libPath == path

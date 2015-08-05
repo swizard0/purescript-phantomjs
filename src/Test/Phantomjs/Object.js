@@ -44,8 +44,14 @@ exports.exit = function (exitCode) {
   }
 }
 
-exports.libraryPath = function () {
+exports.getLibraryPath = function () {
   return phantom.libraryPath
+}
+
+exports.setLibraryPath = function (path) {
+  return function () {
+    return phantom.libraryPath = path
+  }
 }
 
 exports.version = function () {

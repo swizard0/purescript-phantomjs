@@ -27,7 +27,7 @@ phantomSpec tests = run [consoleReporter] do
 -- with Phantom - except that Phantom is running *us* after we get
 -- compiled. Because of this, we need to print our own output.
 test desc cond = do
-  log $ (if cond then "Success" else "Failure") ++ ": " ++ desc
+  log $ (if cond then "Success" else "FAILURE") ++ ": " ++ desc
   unit `shouldEqual` unit
 
 typeTest desc value matchType = do
