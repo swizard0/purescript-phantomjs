@@ -1,4 +1,4 @@
-module Test.Phantomjs.Webpage.Papersize (
+module Test.Phantomjs.Webpage.PaperSizeUtil (
   Format(..)
 , Length(..)
 , Margin(..)

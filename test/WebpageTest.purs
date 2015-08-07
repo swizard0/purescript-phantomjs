@@ -6,7 +6,7 @@ import Prelude
 import TestHelpers
 import Test.Phantomjs
 import qualified Test.Phantomjs.Webpage as W
-import qualified Test.Phantomjs.Webpage.Papersize as W
+import qualified Test.Phantomjs.Webpage.PaperSizeUtil as W
 import Control.Monad.Aff.Console
 import Control.Monad.Eff.Class
 import Math (abs)

@@ -19,15 +19,71 @@ data Page :: *
 An instance of Phantom's `webpage`.
 
 
-#### `Rect`
+#### `RectObj`
 
 ``` purescript
-newtype Rect
-  = Rect { top :: Int, left :: Int, width :: Int, height :: Int }
+type RectObj = { top :: Int, left :: Int, width :: Int, height :: Int }
 ```
 
 Rectangular area of the web page to be rasterized when rendered.
 
+
+#### `Rect`
+
+``` purescript
+newtype Rect
+  = Rect RectObj
+```
+
+#### `ScrollPositionObj`
+
+``` purescript
+type ScrollPositionObj = { top :: Int, left :: Int }
+```
+
+#### `ScrollPosition`
+
+``` purescript
+newtype ScrollPosition
+  = ScrollPosition ScrollPositionObj
+```
+
+#### `ViewportSizeObj`
+
+``` purescript
+type ViewportSizeObj = { width :: Int, height :: Int }
+```
+
+#### `ViewportSize`
+
+``` purescript
+newtype ViewportSize
+  = ViewportSize ViewportSizeObj
+```
+
+#### `getClipRect`
+
+``` purescript
+getClipRect :: forall e. Page -> Eff (phantomjs :: PHANTOMJS | e) Rect
+```
+
+Gets the rectangular area of the web page to be rasterized when rendered.
+
+
+#### `setClipRect`
+
+``` purescript
+setClipRect :: forall e. Page -> Rect -> Eff (phantomjs :: PHANTOMJS | e) Unit
+```
+
+Sets the rectangular area of the web page to be rasterized when rendered.
+
+
+#### `content`
+
+``` purescript
+content :: forall e. Page -> Eff (phantomjs :: PHANTOMJS | e) String
+```
 
 #### `create`
 
@@ -67,6 +123,12 @@ openWithTimeout :: forall e. Page -> String -> Timeout -> Aff (avar :: AVAR, pha
 Opens a connection to the given URL, but may fail with a timeout.
 
 
+#### `plainText`
+
+``` purescript
+plainText :: forall e. Page -> Eff (phantomjs :: PHANTOMJS | e) String
+```
+
 #### `render`
 
 ``` purescript
@@ -77,13 +139,52 @@ Renders the page image to a file. File extension determines
 format. Accepts: PNG, GIF, JPEG, PDF.
 
 
-#### `setClipRect`
+#### `getScrollPosition`
 
 ``` purescript
-setClipRect :: forall e. Page -> Rect -> Eff (phantomjs :: PHANTOMJS | e) Unit
+getScrollPosition :: forall e. Page -> Eff (phantomjs :: PHANTOMJS | e) ScrollPosition
 ```
 
-Sets the rectangular area of the web page to be rasterized when rendered.
+#### `setScrollPosition`
+
+``` purescript
+setScrollPosition :: forall e. Page -> ScrollPosition -> Eff (phantomjs :: PHANTOMJS | e) Unit
+```
+
+#### `url`
+
+``` purescript
+url :: forall e. Page -> Eff (phantomjs :: PHANTOMJS | e) String
+```
+
+#### `getViewportSize`
+
+``` purescript
+getViewportSize :: forall e. Page -> Eff (phantomjs :: PHANTOMJS | e) ViewportSize
+```
+
+#### `setViewportSize`
+
+``` purescript
+setViewportSize :: forall e. Page -> ViewportSize -> Eff (phantomjs :: PHANTOMJS | e) Unit
+```
+
+#### `getZoomFactor`
+
+``` purescript
+getZoomFactor :: forall e. Page -> Eff (phantomjs :: PHANTOMJS | e) Number
+```
+
+Gets the zoom factor for the page.
+
+
+#### `setZoomFactor`
+
+``` purescript
+setZoomFactor :: forall e. Page -> Number -> Eff (phantomjs :: PHANTOMJS | e) Unit
+```
+
+Sets the zoom factor for the page.
 
 
 
