@@ -6,6 +6,7 @@ import Prelude
 import TestHelpers
 import Test.Phantomjs
 import qualified Test.Phantomjs.Webpage as W
+import qualified Test.Phantomjs.Webpage.Papersize as W
 import Control.Monad.Aff.Console
 import Control.Monad.Eff.Class
 import Math (abs)
@@ -43,6 +44,10 @@ webpageTest = do
     liftEff $ W.setZoomFactor page 0.10
     size <- liftEff $ W.getZoomFactor page
     test "get and set zoomFactor" $ abs (size - 0.10) < 0.000001
+
+    liftEff $ W.setPaperSize page $ W.PaperSize (W.PaperDimensions W.A4 W.Portrait) W.noMargin
+    test "set paperSize" $ true
+
 
 exampleText = """Example Domain
 

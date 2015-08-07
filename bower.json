@@ -21,7 +21,8 @@
     "purescript-aff": "~0.11.3",
     "purescript-arrays": "~0.4.1",
     "purescript-maps": "~0.4.2",
-    "purescript-math": "~0.2.0"
+    "purescript-math": "~0.2.0",
+    "purescript-integers": "~0.2.1"
   },
   "repository": {
     "type": "git",
