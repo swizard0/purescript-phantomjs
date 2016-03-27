@@ -1,6 +1,6 @@
 "use strict"
 
-// module Test.Phantomjs.System
+// module Phantomjs.System
 
 exports.args = function () {
   return require('system').args

@@ -1,4 +1,4 @@
-module Test.Phantomjs.ChildProcess (
+module Phantomjs.ChildProcess (
   ChildProcess()
 , Command()
 , Arg()
@@ -6,7 +6,7 @@ module Test.Phantomjs.ChildProcess (
 ) where
 
 import Control.Monad.Eff
-import Test.Phantomjs
+import Phantomjs
 
 foreign import data ChildProcess :: *
 

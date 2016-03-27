@@ -1,6 +1,6 @@
 "use strict"
 
-// module Test.Phantomjs.ChildProcess
+// module Phantomjs.ChildProcess
 
 exports.spawn = function (command) {
   return function (args) {

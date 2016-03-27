@@ -1,4 +1,4 @@
-module Test.Phantomjs (
+module Phantomjs (
   File()
 , PHANTOMJS()
 , Timeout()

@@ -1,6 +1,6 @@
 'use strict'
 
-// module Test.Phantomjs.Webpage.PaperSizeUtil
+// module Phantomjs.Webpage.PaperSizeUtil
 
 // exports.exampleHeaderCallback = function (pageNum, numPages) {
 //   return "<h1>Header <span style='float:right'>" + pageNum + " / " + numPages + "</span></h1>"

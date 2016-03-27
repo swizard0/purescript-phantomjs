@@ -1,4 +1,4 @@
-module Test.Phantomjs.Webpage (
+module Phantomjs.Webpage (
   BrowserProc()
 , Page()
 , Rect(..)
@@ -36,7 +36,7 @@ import Control.Monad.Aff
 import Control.Monad.Aff.AVar
 import Control.Monad.Aff.Par
 import Control.Monad.Error.Class
-import Test.Phantomjs
+import Phantomjs
 
 -- | Represents a NON-closure procedure that will be run in the
 -- | browser environment.

@@ -1,7 +1,8 @@
 {
   "name": "purescript-phantomjs",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "authors": [
+    "Alexey Voznyuk <me@swizard.info>",
     "Andrew Mohrland <cxfreeio@gmail.com>"
   ],
   "license": "MIT",
@@ -26,7 +27,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/cxfreeio/purescript-phantomjs.git"
+    "url": "git://github.com/swizard0/purescript-phantomjs.git"
   },
   "devDependencies": {
     "purescript-spec": "~0.7.1"

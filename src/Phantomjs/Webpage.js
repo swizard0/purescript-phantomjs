@@ -1,6 +1,6 @@
 "use strict"
 
-// module Test.Phantomjs.Webpage
+// module Phantomjs.Webpage
 
 exports.content = function (page) {
   return function () {

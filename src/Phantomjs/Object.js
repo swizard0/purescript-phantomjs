@@ -1,6 +1,6 @@
 "use strict"
 
-// module Test.Phantomjs.Object
+// module Phantomjs.Object
 
 exports.addCookie = function (cookie) {
   return function () {

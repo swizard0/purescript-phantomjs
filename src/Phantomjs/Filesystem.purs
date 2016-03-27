@@ -1,9 +1,9 @@
-module Test.Phantomjs.Filesystem (
+module Phantomjs.Filesystem (
   read
 ) where
 
 import Control.Monad.Eff
-import Test.Phantomjs
+import Phantomjs
 
 
 foreign import read

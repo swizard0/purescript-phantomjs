@@ -1,4 +1,4 @@
-module Test.Phantomjs.Object (
+module Phantomjs.Object (
   Cookie(..)
 , Version()
 , addCookie
@@ -16,7 +16,7 @@ module Test.Phantomjs.Object (
 
 import Prelude
 import Control.Monad.Eff
-import Test.Phantomjs
+import Phantomjs
 
 newtype Cookie r = Cookie { name :: String, value :: String, domain :: String | r }
 

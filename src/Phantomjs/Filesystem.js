@@ -1,6 +1,6 @@
 "use strict"
 
-// module Test.Phantomjs.Filesystem
+// module Phantomjs.Filesystem
 
 exports.read = function (file) {
   return function () {

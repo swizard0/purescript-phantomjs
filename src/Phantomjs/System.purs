@@ -1,4 +1,4 @@
-module Test.Phantomjs.System (
+module Phantomjs.System (
   args
 , env
 , os
@@ -7,7 +7,7 @@ module Test.Phantomjs.System (
 ) where
 
 import Control.Monad.Eff
-import Test.Phantomjs
+import Phantomjs
 import Data.StrMap
 
 foreign import args

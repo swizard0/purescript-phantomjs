@@ -1,4 +1,4 @@
-module Test.Phantomjs.Webpage.PaperSizeUtil (
+module Phantomjs.Webpage.PaperSizeUtil (
   Format(..)
 , Length(..)
 , Margin(..)
@@ -22,9 +22,9 @@ import Prelude
 import Data.Function
 import Data.Maybe
 import Control.Monad.Eff
-import Test.Phantomjs
+import Phantomjs
 import Data.Int
-import Test.Phantomjs.Webpage
+import Phantomjs.Webpage
 
 type Top = Length
 type Left = Length
