@@ -1,4 +1,4 @@
-## Module Test.Phantomjs.Webpage
+## Module Phantomjs.Webpage
 
 #### `BrowserProc`
 
@@ -98,6 +98,39 @@ Creates an instance of Phantom's `webpage`.
 
 ``` purescript
 evaluate0 :: forall e a. Page -> BrowserProc a -> Eff (phantomjs :: PHANTOMJS | e) a
+```
+
+Run a NON-closure procedure in the browser
+environment. `evaluateN` takes N arguments. Arguments must be
+JSON-serializable.
+
+
+#### `evaluate1`
+
+``` purescript
+evaluate1 :: forall e a b. Page -> (a -> BrowserProc b) -> a -> Eff (phantomjs :: PHANTOMJS | e) b
+```
+
+Run a NON-closure procedure in the browser
+environment. `evaluateN` takes N arguments. Arguments must be
+JSON-serializable.
+
+
+#### `evaluate2`
+
+``` purescript
+evaluate2 :: forall e a b c. Page -> (a -> b -> BrowserProc c) -> a -> b -> Eff (phantomjs :: PHANTOMJS | e) c
+```
+
+Run a NON-closure procedure in the browser
+environment. `evaluateN` takes N arguments. Arguments must be
+JSON-serializable.
+
+
+#### `evaluate3`
+
+``` purescript
+evaluate3 :: forall e a b c d. Page -> (a -> b -> c -> BrowserProc d) -> a -> b -> c -> Eff (phantomjs :: PHANTOMJS | e) d
 ```
 
 Run a NON-closure procedure in the browser

@@ -1,4 +1,4 @@
-## Module Test.Phantomjs.ChildProcess
+## Module Phantomjs.ChildProcess
 
 #### `ChildProcess`
 

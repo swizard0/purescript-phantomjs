@@ -1,4 +1,4 @@
-## Module Test.Phantomjs
+## Module Phantomjs
 
 #### `PHANTOMJS`
 

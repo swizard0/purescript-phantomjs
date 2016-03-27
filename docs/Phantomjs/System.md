@@ -1,4 +1,4 @@
-## Module Test.Phantomjs.System
+## Module Phantomjs.System
 
 #### `args`
 

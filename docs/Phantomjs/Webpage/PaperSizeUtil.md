@@ -1,4 +1,4 @@
-## Module Test.Phantomjs.Webpage.PaperSizeUtil
+## Module Phantomjs.Webpage.PaperSizeUtil
 
 #### `Top`
 
@@ -62,7 +62,7 @@ data Format
 
 ##### Instances
 ``` purescript
-instance showFormat :: Show Format
+Show Format
 ```
 
 #### `Length`
@@ -92,7 +92,7 @@ data Orientation
 
 ##### Instances
 ``` purescript
-instance showOrientation :: Show Orientation
+Show Orientation
 ```
 
 #### `PaperDimensions`
@@ -108,6 +108,12 @@ data PaperDimensions
 ``` purescript
 data PaperSize
   = PaperSize PaperDimensions Margin
+```
+
+#### `noMargin`
+
+``` purescript
+noMargin :: Margin
 ```
 
 #### `setPaperSize`

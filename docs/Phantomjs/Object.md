@@ -1,4 +1,4 @@
-## Module Test.Phantomjs.Object
+## Module Phantomjs.Object
 
 #### `Cookie`
 

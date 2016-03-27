@@ -1,4 +1,4 @@
-## Module Test.Phantomjs.Filesystem
+## Module Phantomjs.Filesystem
 
 #### `read`
 
